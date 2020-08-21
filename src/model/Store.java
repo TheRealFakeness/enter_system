@@ -10,9 +10,20 @@ public class Store {
 	private int enterAttempts;
 	private ArrayList<Client> registeredClients;
 	
+	public int getEnterAttempts() {
+		return enterAttempts;
+	}
+
+	public ArrayList<Client> getRegisteredClients() {
+		return registeredClients;
+	}
+
+	private Client tempClient;
+	
 	public Store() {
 		enterAttempts = 0;
 		registeredClients = new ArrayList<Client>();
+		tempClient = new Client();
 	}
 	
 	public void registerClient(int idType, int id) throws DayMismatchException, UnderageException{
@@ -42,5 +53,9 @@ public class Store {
 	
 	public void displayAttempts() {
 		System.out.println("Numero de personas que ha intentado entrar al establecimiento: " + enterAttempts);
+	}
+
+	public Client getTempClient() {
+		return tempClient;
 	}
 }

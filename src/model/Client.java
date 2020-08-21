@@ -29,4 +29,9 @@ public class Client {
 		this.idType = idType;
 		this.id = id;
 	}
+	
+	public Client() {
+		idType = 0;
+		id = 0;
+	}
 }

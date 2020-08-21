@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class UnderageException extends Exception{
 	private int idType;
 	public UnderageException(int idType){
