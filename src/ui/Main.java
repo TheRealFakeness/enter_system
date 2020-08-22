@@ -9,13 +9,14 @@ import java.util.Scanner;
 
 public class Main {
 
+	private final static Scanner sc = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 		Store store = new Store();
 		boolean exit = false;
 		System.out.println("Bienvenido al sistema de entrada de Mi Barrio te Quiere!");
 		
 		do {
-			Scanner sc = new Scanner(System.in);
 			int options = 0;
 			System.out.println("Elija una opcion:\n1. Registrar ingreso de un cliente.\n2. Consultar cantidad de intentos de entrada.\n3. Salir");
 			while(options < 1 || options > 3) {

@@ -26,7 +26,6 @@ class StoreTest {
 				id = id + 10;
 			}
 			
-			store.getTempClient();
 			store.registerClient(Client.CC, id);
 			assertEquals(store.getRegisteredClients().get(0).getId(), id);
 			assertEquals(store.getRegisteredClients().get(0).getIdType(), Client.CC);
@@ -47,7 +46,6 @@ class StoreTest {
 		try {
 			int id = 1203842;
 			
-			store.getTempClient();
 			store.registerClient(Client.TI, id);
 			fail("UnderageException expected.");
 		}catch(UnderageException ue) {
@@ -71,7 +69,6 @@ class StoreTest {
 				id = id + 10;
 			}
 			
-			store.getTempClient();
 			store.registerClient(Client.CC, id);
 			fail("DayMismatchException expected.");
 		}catch(UnderageException ue) {
