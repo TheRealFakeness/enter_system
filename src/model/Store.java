@@ -29,6 +29,10 @@ public class Store {
 	public void registerClient(int idType, int id) throws DayMismatchException, UnderageException{
 		enterAttempts++;
 		
+		if(idType == Client.TI) {
+			throw new UnderageException(idType);
+		}
+		
 		boolean even = false;
 				if(LocalDate.now().getDayOfMonth() % 2 == 0) {
 			even = true;
@@ -42,10 +46,6 @@ public class Store {
 			if(even == false) {
 				throw new DayMismatchException(id);
 			}
-		}
-		
-		if(idType == Client.TI) {
-			throw new UnderageException(idType);
 		}
 		
 		registeredClients.add(new Client(idType, id));
