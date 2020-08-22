@@ -2,6 +2,7 @@ package model;
 
 import exceptions.UnderageException;
 import exceptions.DayMismatchException;
+import exceptions.InvalidIDException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,7 +27,11 @@ public class Store {
 		tempClient = new Client();
 	}
 	
-	public void registerClient(int idType, int id) throws DayMismatchException, UnderageException{
+	public void registerClient(int idType, int id) throws DayMismatchException, UnderageException, InvalidIDException{
+		if(id < 10) {
+			throw new InvalidIDException(id);
+		}
+		
 		enterAttempts++;
 		
 		if(idType == Client.TI) {
@@ -34,11 +39,13 @@ public class Store {
 		}
 		
 		boolean even = false;
-				if(LocalDate.now().getDayOfMonth() % 2 == 0) {
+		int secondToLastDigit = Math.abs((id%100)/10);
+		
+		if(LocalDate.now().getDayOfMonth() % 2 == 0) {
 			even = true;
 		}
-			
-		if(id % 2 == 0) {
+		
+		if(secondToLastDigit % 2 == 0) {
 			if(even) {
 				throw new DayMismatchException(id);
 			}

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import exceptions.UnderageException;
 import exceptions.DayMismatchException;
+import exceptions.InvalidIDException;
 
 class StoreTest {
 	private Store store;
@@ -22,16 +23,19 @@ class StoreTest {
 			int id = 3064391;
 			
 			if(LocalDate.now().getDayOfMonth() % 2 != 0) {
-				id++;
+				id = id + 10;
 			}
 			
 			store.getTempClient();
 			store.registerClient(Client.CC, id);
 			assertEquals(store.getRegisteredClients().get(0).getId(), id);
 			assertEquals(store.getRegisteredClients().get(0).getIdType(), Client.CC);
+			assertEquals(store.getEnterAttempts(), 1);
 		}catch(UnderageException ue) {
 			fail("UnderageException not expected.");
 		}catch(DayMismatchException dme) {
+			fail("DayMismatchException not expected.");
+		}catch(InvalidIDException iie) {
 			fail("DayMismatchException not expected.");
 		}
 	}
@@ -48,8 +52,11 @@ class StoreTest {
 			fail("UnderageException expected.");
 		}catch(UnderageException ue) {
 			assertEquals(store.getRegisteredClients().size(), 0);
+			assertEquals(store.getEnterAttempts(), 1);
 		}catch(DayMismatchException dme){
 			fail("UnderageException expected.");
+		}catch(InvalidIDException iie) {
+			fail("DayMismatchException not expected.");
 		}
 	}
 	
@@ -61,7 +68,7 @@ class StoreTest {
 			int id = 3064391;
 			
 			if(LocalDate.now().getDayOfMonth() % 2 == 0) {
-				id++;
+				id = id + 10;
 			}
 			
 			store.getTempClient();
@@ -71,6 +78,9 @@ class StoreTest {
 			fail("DayMismatchException expected.");
 		}catch(DayMismatchException dme) {
 			assertEquals(store.getRegisteredClients().size(), 0);
+			assertEquals(store.getEnterAttempts(), 1);
+		}catch(InvalidIDException iie) {
+			fail("DayMismatchException not expected.");
 		}
 	}
 }
